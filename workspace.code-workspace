@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "littleQuest-client"
+		},
+		{
+			"path": "littleQuest-server"
+		}
+	],
+	"settings": {}
+}
