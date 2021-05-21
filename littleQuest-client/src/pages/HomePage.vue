@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    nani????
+    nani?????
   </div>
 </template>
 
