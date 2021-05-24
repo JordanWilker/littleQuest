@@ -7,13 +7,14 @@ namespace littleQuest.Models
       }
 
       public int Id { get; set; }
-      public string Name { get; set; }
-      public string Description {get;set;}
       public string creatorId {get;set;}
-      public string Img {get;set;}
-      public int Views {get;set;}
-      public int Shares {get;set;}
-      public int Keeps {get;set;}
+      public string name { get; set; }
+      public int raceId {get;set;}
+      public int careerId {get;set;}
+      public int health {get;set;}
+      public int rangePower {get;set;}
+      public int magicPower {get;set;}
+      public int swordPower {get;set;}
       public Profile Creator{get;set;}
     }
 }
