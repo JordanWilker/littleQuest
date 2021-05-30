@@ -38,22 +38,7 @@ namespace littleQuest.Repositories
       prof.*
       FROM race race
       JOIN profiles prof ON race.creatorId = prof.id
-      WHERE race.id = @id AND race.isPrivate = false;";
-      return _db.Query<Race, Profile, Race>(sql, (Race, profile) =>
-      {
-        Race.Creator = profile;
-        return Race;
-      }, new { id }, splitOn: "id").FirstOrDefault();
-    }
-    internal Race GetByIdforDelete(int id)
-       {
-      string sql = @" 
-      SELECT 
-      race.*,
-      prof.*
-      FROM race race
-      JOIN profiles prof ON race.creatorId = prof.id
-      WHERE race.id = @id";
+      WHERE race.id = @id;";
       return _db.Query<Race, Profile, Race>(sql, (Race, profile) =>
       {
         Race.Creator = profile;
@@ -65,9 +50,9 @@ namespace littleQuest.Repositories
       {
          string sql = @"
          INSERT INTO race
-         (name, description, isPrivate, creatorId)
+         (name, healthMod, rangeMod, magicMod, swordMod, creatorId)
          VALUES
-         (@name, @description, @isPrivate, @creatorId);
+         (@name, @healthMod, @rangeMod, @magicMod, @swordMod, @creatorId);
          SELECT LAST_INSERT_ID();";
          int id = _db.ExecuteScalar<int>(sql, newRace);
          newRace.Id = id;
@@ -80,7 +65,10 @@ namespace littleQuest.Repositories
          UPDATE race
          SET
             name = @name,
-            description = @description
+            healthMod = @healthMod
+            rangeMod = @rangeMod
+            magicMod = @magicMod
+            swordMod = @swordMod
          WHERE id = @id;
          SELECT * FROM race WHERE id = @id;";
          Race returnRace = _db.QueryFirstOrDefault<Race>(sql, data);
@@ -93,35 +81,5 @@ namespace littleQuest.Repositories
          _db.Execute(sql, new { id });
       }
 
-      internal IEnumerable<Race> GetByCreatorId(string id)
-    {
-      string sql = @"
-      SELECT 
-      race.*,
-      profile.*
-      FROM race race
-      JOIN profiles profile ON race.creatorId = profile.id
-      WHERE race.creatorId = @id;";
-      return _db.Query<Race, Profile, Race>(sql, (race, profile) =>
-      {
-        race.Creator = profile;
-        return race;
-      }, new { id }, splitOn: "id");
-    }
-     internal IEnumerable<Race> GetByAccountId(string id)
-    {
-      string sql = @"
-      SELECT 
-      race.*,
-      profile.*
-      FROM race race
-      JOIN profiles profile ON race.creatorId = profile.id
-      WHERE race.creatorId = @id;";
-      return _db.Query<Race, Profile, Race>(sql, (race, profile) =>
-      {
-        race.Creator = profile;
-        return race;
-      }, new { id }, splitOn: "id");
-    }
    }
 }
