@@ -69,11 +69,18 @@ namespace littleQuest_server
       // TODO Transient Repositories
       services.AddTransient<ProfilesRepository>();
       services.AddTransient<RacesRepository>();
+      services.AddTransient<CareersRepository>();
+      services.AddTransient<HeroesRepository>();
+
       
 
       // TODO Transient Services
       services.AddTransient<ProfilesService>();
       services.AddTransient<RacesService>();
+      services.AddTransient<CareersService>();
+      services.AddTransient<HeroesService>();
+
+
 
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
 

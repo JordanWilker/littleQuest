@@ -9,7 +9,7 @@
 --         PRIMARY KEY (id)
 --     );
 
-CREATE TABLE race
+CREATE TABLE career
     (
         id INT AUTO_INCREMENT,
         creatorId VARCHAR(255),
