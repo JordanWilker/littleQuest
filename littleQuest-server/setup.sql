@@ -1,67 +1,39 @@
- 
---  CREATE TABLE profiles
---     (
---         id VARCHAR(255) NOT NULL,
---         email VARCHAR(255) NOT NULL,
---         name VARCHAR(255),
---         picture VARCHAR(255),
---         creator VARCHAR(255),
---         PRIMARY KEY (id)
---     );
-
-CREATE TABLE career
-    (
-        id INT AUTO_INCREMENT,
-        creatorId VARCHAR(255),
-        name VARCHAR(255),
-        healthMod INT,
-        rangeMod INT,
-        magicMod INT,
-        swordMod INT,
-        PRIMARY KEY(id),
-
-        FOREIGN KEY(creatorId)
-            REFERENCES profiles(id)
-            ON DELETE CASCADE
-    );
-
--- CREATE TABLE keep
---     (
---         id INT AUTO_INCREMENT,
---         creatorId VARCHAR(255),
---         name VARCHAR(255),
---         description VARCHAR(255),
---         img VARCHAR(255),
---         views INT,
---         shares INT,
---         keeps INT, 
---         PRIMARY KEY(id),
---         FOREIGN KEY(creatorId)
---             REFERENCES profiles(id)
---             ON DELETE CASCADE
---     );
--- TRUNCATE TABLE keep
-
---  CREATE TABLE vaultkeep
--- (
---   id INT NOT NULL AUTO_INCREMENT, 
---   keepId INT,
---   vaultId INT,
---   creatorId VARCHAR(255),
---   PRIMARY KEY (id),
-
---    FOREIGN KEY (creatorId)
---    REFERENCES profiles (id)
---    ON DELETE CASCADE,
-
---   FOREIGN KEY (vaultId)
---    REFERENCES vault (id)
---    ON DELETE CASCADE,
-
---   FOREIGN KEY (keepId)
---    REFERENCES keep (id)
---    ON DELETE CASCADE
-
--- )
-
--- DROP TABLE vaultkeep
+CREATE TABLE profiles (
+  id VARCHAR(255) NOT NULL,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  email VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
+  picture VARCHAR(255),
+  creator VARCHAR(255),
+  PRIMARY KEY (id)
+);
+CREATE TABLE race (
+  id INT AUTO_INCREMENT,
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  creatorId VARCHAR(255),
+  name VARCHAR(255),
+  healthMod INT,
+  rangeMod INT,
+  magicMod INT,
+  swordMod INT,
+  PRIMARY KEY(id),
+  FOREIGN KEY(creatorId) REFERENCES profiles(id) ON DELETE CASCADE
+);
+CREATE TABLE career (
+  id INT AUTO_INCREMENT,
+  creatorId VARCHAR(255),
+  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  name VARCHAR(255),
+  healthMod INT,
+  rangeMod INT,
+  magicMod INT,
+  swordMod INT,
+  PRIMARY KEY(id),
+  FOREIGN KEY(creatorId) REFERENCES profiles(id) ON DELETE CASCADE
+);
+DROP TABLE profiles;
+DROP TABLE race;
+DROP TABLE career;
