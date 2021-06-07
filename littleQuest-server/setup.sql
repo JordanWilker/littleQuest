@@ -37,3 +37,4 @@ CREATE TABLE career (
 DROP TABLE profiles;
 DROP TABLE race;
 DROP TABLE career;
+-- STOOPID
