@@ -34,6 +34,20 @@ CREATE TABLE career (
   PRIMARY KEY(id),
   FOREIGN KEY(creatorId) REFERENCES profiles(id) ON DELETE CASCADE
 );
+CREATE TABLE hero (
+  id INT AUTO_INCREMENT,
+  raceId INT,
+  careerId INT,
+  creatorId VARCHAR (255),
+  name VARCHAR (255),
+  health INT,
+  rangePower INT,
+  magicPower INT,
+  swordPower INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (creatorId) REFERENCES profiles(id) ON DELETE CASCADE 
+);
 DROP TABLE profiles;
 DROP TABLE race;
 DROP TABLE career;
+DROP TABLE hero;
