@@ -52,7 +52,7 @@ namespace littleQuest.Repositories
          INSERT INTO hero
          (name, health, rangePower, magicPower, swordPower, creatorId, raceId, careerId)
          VALUES
-         (@name, 7, 6, 2, @swordPower, @creatorId, 1,1);
+         ('Mr.Rando1', @health, @rangePower, @magicPower, @swordPower, @creatorId, @raceId, @careerId);
          SELECT LAST_INSERT_ID();";
             int id = _db.ExecuteScalar<int>(sql, newHero);
             newHero.Id = id;

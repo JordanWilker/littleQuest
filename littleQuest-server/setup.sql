@@ -51,3 +51,8 @@ DROP TABLE profiles;
 DROP TABLE race;
 DROP TABLE career;
 DROP TABLE hero;
+SELECT * from race WHERE id = (FLOOR(RAND()*(4-1+1)+1));
+SELECT FLOOR(RAND()*(4-1+1)+1);
+
+
+

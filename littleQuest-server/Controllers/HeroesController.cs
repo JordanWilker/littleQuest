@@ -5,6 +5,10 @@ using littleQuest.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
+using Dapper;
+using System.Data;
+using System.Linq;
+
 
 namespace littleQuest.Controllers
 {
@@ -13,9 +17,11 @@ namespace littleQuest.Controllers
    public class HeroesController : ControllerBase
    {
       private readonly HeroesService _service;
-      public HeroesController(HeroesService service)
+      private readonly IDbConnection _db;
+      public HeroesController(HeroesService service, IDbConnection db)
       {
          _service = service;
+         _db = db;
       }
 
       [HttpGet]
@@ -50,9 +56,24 @@ namespace littleQuest.Controllers
     {
       try
       {
+        System.Random random = new System.Random();
+        int raceNumber = random.Next(1,5);
+        int careerNumber = random.Next(1,5);
+        string raceQuery = @"
+            SELECT * FROM race WHERE id = @Id;";
+        var raceInfo = _db.QueryFirst<Race>(raceQuery, new { Id =  raceNumber});
+        string careerQuery = @"
+            SELECT * FROM career WHERE id = @Id;";
+        var careerInfo = _db.QueryFirst<Career>(careerQuery, new {Id = careerNumber});
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         newHero.creatorId = userInfo.Id;
         newHero.Creator = userInfo;
+        newHero.raceId = raceInfo.Id;
+        newHero.careerId = careerInfo.Id;
+        newHero.health = raceInfo.healthMod + careerInfo.healthMod;
+        newHero.rangePower = raceInfo.rangeMod + careerInfo.rangeMod;
+        newHero.magicPower = raceInfo.magicMod + careerInfo.magicMod;
+        newHero.swordPower = raceInfo.swordMod + careerInfo.swordMod;
         Hero created = _service.Create(newHero);
 
         return Ok(created);
