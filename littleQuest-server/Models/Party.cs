@@ -11,6 +11,7 @@ namespace littleQuest.Models
         public int hero1Id {get; set;}
         public int hero2Id {get; set;}
         public int hero3Id {get; set;}
+        public int hero4Id {get;set;}
         public Profile Creator {get; set;}
 
     }

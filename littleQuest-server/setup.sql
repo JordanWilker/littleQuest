@@ -47,12 +47,21 @@ CREATE TABLE hero (
   PRIMARY KEY (id),
   FOREIGN KEY (creatorId) REFERENCES profiles(id) ON DELETE CASCADE 
 );
+CREATE TABLE party (
+  id INT AUTO_INCREMENT,
+  hero1Id INT,
+  hero2Id INT,
+  hero3Id INT,
+  hero4Id INT,
+  creatorId VARCHAR (255),
+  PRIMARY KEY (id),
+  FOREIGN KEY (creatorId) REFERENCES profiles(id) ON DELETE CASCADE 
+);
 DROP TABLE profiles;
 DROP TABLE race;
 DROP TABLE career;
 DROP TABLE hero;
-SELECT * from race WHERE id = (FLOOR(RAND()*(4-1+1)+1));
-SELECT FLOOR(RAND()*(4-1+1)+1);
+DROP TABLE party;
 
 
 

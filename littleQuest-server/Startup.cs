@@ -71,6 +71,7 @@ namespace littleQuest_server
             services.AddTransient<RacesRepository>();
             services.AddTransient<CareersRepository>();
             services.AddTransient<HeroesRepository>();
+            services.AddTransient<PartiesRepository>();
 
 
 
@@ -79,7 +80,7 @@ namespace littleQuest_server
             services.AddTransient<RacesService>();
             services.AddTransient<CareersService>();
             services.AddTransient<HeroesService>();
-
+            services.AddTransient<PartiesService>();
 
 
             services.AddScoped<IDbConnection>(x => CreateDbConnection());
